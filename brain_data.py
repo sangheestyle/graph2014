@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class BrainData:
 
     """
@@ -15,7 +18,7 @@ class BrainData:
         assert type(data) is dict, "dict expected: %r" % type(data)
         assert len(data) is 1, "size of dict should be 1: %r" % len(data)
         self._name = data.keys()[0]
-        self._data = data[self._name]
+        self._data = np.asarray(data[self._name])
         self._set = True
 
     @property
