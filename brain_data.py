@@ -58,9 +58,17 @@ class BrainData(object):
         """
         return self._graph
 
-    def calc_covariance(self, method="graphlassocv"):
+    def calc_covariance(self, method="graphlassocv", values="cov"):
         """
         Cacl coveriance matrix to make graph
+        parameters
+        ----------
+        method: string
+            Type of algorithm for covariance, graphlassocv
+        values: string
+            Type of values for matrix for graph
+            cov: covariance_
+            pre: precision_
         """
         if method == "graphlassocv":
             self._model = covariance.GraphLassoCV()
@@ -68,5 +76,10 @@ class BrainData(object):
             assert NotImplementedError
         self._model_name = method
         self._model.fit(self._data)
-        self._graph = nx.from_numpy_matrix(self._model.covariance_)
+        if values == "cov":
+            self._graph = nx.from_numpy_matrix(self._model.covariance_)
+        elif values == "pre":
+            self._graph = nx.from_numpy_matrix(self._model.precision_)
+        else:
+            assert NotImplementedError
         self._modeled = True
