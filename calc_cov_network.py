@@ -2,6 +2,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import covariance
+import os
 
 
 raw_data = json.load(open('data/data_v2.json'))
@@ -10,6 +11,7 @@ data = raw_data['subj1_16regions_1845time']
 # model = covariance.GraphLasso(alpha=0.001)
 model = covariance.GraphLassoCV()
 model.fit(data)
+os.exit()
 cov_ = model.covariance_
 
 plt.figure(figsize=(8, 8))
