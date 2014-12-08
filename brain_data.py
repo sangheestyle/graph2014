@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class BrainData:
+class BrainData(object):
 
     """
     Represents formatted FMRI data
@@ -15,6 +15,9 @@ class BrainData:
         self._init_data(data)
 
     def _init_data(self, data):
+        """
+        Read data from a dictionary
+        """
         assert type(data) is dict, "dict expected: %r" % type(data)
         assert len(data) is 1, "size of dict should be 1: %r" % len(data)
         self._name = data.keys()[0]
@@ -23,8 +26,14 @@ class BrainData:
 
     @property
     def data(self):
+        """
+        Raw FMRI data
+        """
         return self._data
 
     @property
     def name(self):
+        """
+        Data name
+        """
         return self._name
